@@ -3,15 +3,7 @@ package com.santamaria.mycurrentweather
 /**
  * Created by Santamaria on 21/10/2017.
  */
-class Minutely {
+class Minutely(var icon : String, var data : ArrayList<MinutelyData>? = null) {
 
-    var iconName : String = ""
-    var minute : Int = 0
-    var probability : Int = 0
 
-    constructor(iconName: String, minute: Int, probability: Int) {
-        this.iconName = iconName
-        this.minute = minute
-        this.probability = probability
-    }
 }
