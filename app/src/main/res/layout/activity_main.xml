@@ -15,7 +15,7 @@
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="8dp"
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="0"
-        android:textSize="54sp"
+        android:textSize="60sp"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -79,7 +79,7 @@
         android:layout_marginLeft="60dp"
         android:layout_marginTop="24dp"
         android:text="H:0º"
-        android:textSize="22sp"
+        android:textSize="30sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idCurrentNumber" />
 
@@ -91,7 +91,7 @@
         android:layout_marginRight="60dp"
         android:layout_marginTop="24dp"
         android:text="L:0º"
-        android:textSize="22sp"
+        android:textSize="30sp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idCurrentNumber" />
 
@@ -114,7 +114,7 @@
         style="@style/myTextFont"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="50dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:text="DAILY"
@@ -122,14 +122,15 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/guideline" />
+        app:layout_constraintRight_toLeftOf="@+id/guideline"
+        app:layout_constraintHorizontal_bias="0.508" />
 
     <TextView
         android:id="@+id/idHourly"
         style="@style/myTextFont"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="50dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:text="HOURLY"
@@ -137,14 +138,15 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="@+id/guideline"
-        app:layout_constraintRight_toLeftOf="@+id/guideline2" />
+        app:layout_constraintRight_toLeftOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.512" />
 
     <TextView
         android:id="@+id/idMinutely"
         style="@style/myTextFont"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="50dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:text="MINUTELY"
