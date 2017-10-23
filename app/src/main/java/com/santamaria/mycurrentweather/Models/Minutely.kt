@@ -1,4 +1,4 @@
-package com.santamaria.mycurrentweather
+package com.santamaria.mycurrentweather.Models
 
 /**
  * Created by Santamaria on 21/10/2017.

@@ -1,4 +1,4 @@
-package com.santamaria.mycurrentweather
+package com.santamaria.mycurrentweather.API
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
