@@ -1,13 +1,16 @@
 package com.santamaria.mycurrentweather.Activities
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.santamaria.mycurrentweather.API.Forecast
 import com.santamaria.mycurrentweather.Models.Basic
 import com.santamaria.mycurrentweather.R
+import com.santamaria.mycurrentweather.UtilityClass
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -65,7 +68,7 @@ class MainActivity : AppCompatActivity() {
 
         summary?.text = forecastData?.currently?.summary
         temperature?.text = Math.round(forecastData?.currently?.temperature!!).toString()
-        icon?.setImageResource(getImage(forecastData?.currently?.icon!!))
+        icon?.setImageResource(UtilityClass.getImage(forecastData?.currently?.icon!!))
         if (forecastData?.daily?.data != null && forecastData?.daily?.data?.size!! > 0) {
             high?.text = Math.round(forecastData?.daily?.data?.get(0)!!.temperatureHigh).toString()
             low?.text = Math.round(forecastData?.daily?.data?.get(0)!!.temperatureLow).toString()
@@ -73,28 +76,21 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun getImage(iconName : String) : Int {
+    fun onDailyClick(view : View) {
 
-        var drawableToUse = 0
+        var intent = Intent(this, DailyActivity::class.java)
+        var bundle = Bundle()
+        bundle.putParcelable("daily", forecastData?.daily)
+        intent.putExtras(bundle)
+        startActivity(intent)
 
-        when (iconName) {
+    }
 
-            "clear-day" -> drawableToUse = R.drawable.clear_day
-            "clear-night" -> drawableToUse = R.drawable.clear_night
-            "cloudy" -> drawableToUse = R.drawable.cloudy
-            "cloudy-night" -> drawableToUse = R.drawable.cloudy_night
-            "fog" -> drawableToUse = R.drawable.fog
-            "na" -> drawableToUse = R.drawable.na
-            "partly_cloudy" -> drawableToUse = R.drawable.partly_cloudy
-            "rain" -> drawableToUse = R.drawable.rain
-            "sleet" -> drawableToUse = R.drawable.sleet
-            "snow" -> drawableToUse = R.drawable.snow
-            "sunny" -> drawableToUse = R.drawable.sunny
-            "wind" -> drawableToUse = R.drawable.wind
+    fun onHourlyClick(view : View) {
 
-        }
+    }
 
-        return drawableToUse
+    fun onMinutelyClick(view : View) {
 
     }
 }
