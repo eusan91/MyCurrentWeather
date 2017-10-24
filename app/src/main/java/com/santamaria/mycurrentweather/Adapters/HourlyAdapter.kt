@@ -19,7 +19,7 @@ import java.util.*
  */
 class HourlyAdapter(var context : Context?, var data: ArrayList<HourlyData>, var layout: Int) : BaseAdapter() {
 
-    var df = SimpleDateFormat("HH:mm")
+    var df = SimpleDateFormat("dd/MM - HH:mm")
 
     override fun getItem(p0: Int): Any {
         return data[p0]
@@ -58,10 +58,13 @@ class HourlyAdapter(var context : Context?, var data: ArrayList<HourlyData>, var
 
         var hourlyData = data[position]
 
+        var cal = Calendar.getInstance()
         var dayDate = Date(hourlyData.time*1000)
+        cal.time = dayDate
+
         df.timeZone = TimeZone.getDefault();
 
-        viewHolder.tvDay!!.text = df.format(dayDate)
+        viewHolder.tvDay!!.text = UtilityClass.getStrDayFromNumber(cal.get(Calendar.DAY_OF_WEEK)) + " " + df.format(dayDate)
         viewHolder?.tvSummary?.text = hourlyData.summary
         viewHolder?.ivIcon?.setImageResource(UtilityClass.getImage((hourlyData.icon)))
 

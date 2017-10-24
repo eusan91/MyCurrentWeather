@@ -7,7 +7,6 @@ class Basic {
 
     var timezone: String = ""
     var currently: Currently? = null
-    var minutely: Minutely? = null
     var hourly: Hourly? = null
     var daily: Daily? = null
 
