@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 
                     forecastData = response.body()
 
-                    loadMainData()
+                    loadMainActivity()
                 }
             }
 
@@ -56,19 +56,23 @@ class MainActivity : AppCompatActivity() {
         icon = findViewById(R.id.idImgCurrentWeather) as ImageView
         summary = findViewById(R.id.idCurrentWeather) as TextView
         temperature = findViewById(R.id.idCurrentNumber) as TextView
-        high = findViewById(R.id.idHigh) as TextView
-        low = findViewById(R.id.idLow) as TextView
+        high = findViewById(R.id.idTempH) as TextView
+        low = findViewById(R.id.idTempL) as TextView
     }
 
-    private fun loadMainData() {
+    private fun loadMainActivity() {
 
         summary?.text = forecastData?.currently?.summary
         temperature?.text = Math.round(forecastData?.currently?.temperature!!).toString()
-        getImage(forecastData?.currently?.icon!!)
+        icon?.setImageResource(getImage(forecastData?.currently?.icon!!))
+        if (forecastData?.daily?.data != null && forecastData?.daily?.data?.size!! > 0) {
+            high?.text = Math.round(forecastData?.daily?.data?.get(0)!!.temperatureHigh).toString()
+            low?.text = Math.round(forecastData?.daily?.data?.get(0)!!.temperatureLow).toString()
+        }
 
     }
 
-    private fun getImage(iconName : String){
+    private fun getImage(iconName : String) : Int {
 
         var drawableToUse = 0
 
@@ -89,7 +93,7 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        icon?.setImageResource(drawableToUse)
+        return drawableToUse
 
     }
 }
