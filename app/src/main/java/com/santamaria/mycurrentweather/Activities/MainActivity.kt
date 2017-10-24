@@ -1,4 +1,4 @@
-package com.santamaria.mycurrentweather
+package com.santamaria.mycurrentweather.Activities
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -7,6 +7,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.santamaria.mycurrentweather.API.Forecast
 import com.santamaria.mycurrentweather.Models.Basic
+import com.santamaria.mycurrentweather.R
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
