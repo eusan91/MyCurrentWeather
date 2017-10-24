@@ -1,6 +1,7 @@
 package com.santamaria.mycurrentweather.Adapters
 
 import android.content.Context
+import android.opengl.Visibility
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +20,9 @@ import java.util.*
  */
 class HourlyAdapter(var context : Context?, var data: ArrayList<HourlyData>, var layout: Int) : BaseAdapter() {
 
-    var df = SimpleDateFormat("dd/MM - HH:mm")
+    var dfOnlyDate = SimpleDateFormat("dd/MM")
+    var df = SimpleDateFormat("HH:mm")
+    var day : Int = -1
 
     override fun getItem(p0: Int): Any {
         return data[p0]
@@ -62,9 +65,16 @@ class HourlyAdapter(var context : Context?, var data: ArrayList<HourlyData>, var
         var dayDate = Date(hourlyData.time*1000)
         cal.time = dayDate
 
+
         df.timeZone = TimeZone.getDefault();
 
-        viewHolder.tvDay!!.text = UtilityClass.getStrDayFromNumber(cal.get(Calendar.DAY_OF_WEEK)) + " " + df.format(dayDate)
+        if (day != Calendar.DAY_OF_WEEK){
+            viewHolder.tvGroupDay.text = UtilityClass.getStrDayFromNumber(cal.get(Calendar.DAY_OF_WEEK)) + " " + dfOnlyDate.format(dayDate)
+            viewHolder.tvGroupDay.visibility =  View.VISIBLE
+            day = Calendar.DAY_OF_WEEK
+        }
+
+        viewHolder.tvDay!!.text = df.format(dayDate)
         viewHolder?.tvSummary?.text = hourlyData.summary
         viewHolder?.ivIcon?.setImageResource(UtilityClass.getImage((hourlyData.icon)))
 
@@ -73,11 +83,13 @@ class HourlyAdapter(var context : Context?, var data: ArrayList<HourlyData>, var
 
     inner class ViewHolder (var view : View ){
 
+        var tvGroupDay : TextView
         var tvDay : TextView
         var ivIcon : ImageView
         var tvSummary : TextView
 
         init {
+            tvGroupDay = view.findViewById(R.id.idGroupDay) as TextView
             tvDay = view.findViewById(R.id.idDay) as TextView
             ivIcon = view.findViewById(R.id.idIcon) as ImageView
             tvSummary = view.findViewById(R.id.idSummary) as TextView
