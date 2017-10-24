@@ -4,7 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.BaseAdapter
 import android.widget.ListView
-import com.santamaria.mycurrentweather.DailyAdapter
+import com.santamaria.mycurrentweather.Adapters.DailyAdapter
 import com.santamaria.mycurrentweather.Models.Daily
 
 import com.santamaria.mycurrentweather.R

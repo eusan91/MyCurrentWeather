@@ -1,7 +1,6 @@
-package com.santamaria.mycurrentweather
+package com.santamaria.mycurrentweather.Adapters
 
 import android.content.Context
-import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +8,8 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import com.santamaria.mycurrentweather.Models.DailyData
-import org.w3c.dom.Text
+import com.santamaria.mycurrentweather.R
+import com.santamaria.mycurrentweather.UtilityClass
 import java.util.*
 
 /**
@@ -23,7 +23,7 @@ class DailyAdapter(var context : Context, var dailyList : ArrayList<DailyData>, 
 
     override fun getItemId(position: Int): Long {
 
-        return this.getItemId(position)
+        return 0
 
     }
 

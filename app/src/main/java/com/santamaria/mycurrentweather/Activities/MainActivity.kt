@@ -88,10 +88,11 @@ class MainActivity : AppCompatActivity() {
 
     fun onHourlyClick(view : View) {
 
+        var intent = Intent(this, HourlyActivity::class.java)
+        intent.putExtra("hourly", forecastData?.hourly)
+        startActivity(intent)
+
     }
 
-    fun onMinutelyClick(view : View) {
-
-    }
 }
 
