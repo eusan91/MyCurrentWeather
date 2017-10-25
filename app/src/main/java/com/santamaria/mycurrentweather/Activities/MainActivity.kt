@@ -1,19 +1,27 @@
 package com.santamaria.mycurrentweather.Activities
 
+import android.Manifest
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationManager
+import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import com.santamaria.mycurrentweather.API.Forecast
+import com.santamaria.mycurrentweather.Location.LocationAPI
+import com.santamaria.mycurrentweather.Retrofit.Forecast
 import com.santamaria.mycurrentweather.Models.Basic
 import com.santamaria.mycurrentweather.R
 import com.santamaria.mycurrentweather.UtilityClass
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 
 
 
@@ -28,23 +36,45 @@ class MainActivity : AppCompatActivity(){
     var high : TextView? = null
     var low : TextView? = null
 
+    var myLocation = LocationAPI()
+
+    val GPS_PERMISSION = 1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         getViews()
 
-        getForecastInformation()
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+
+            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+
+                requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), GPS_PERMISSION)
+
+            } else {
+                getCurrentLocation()
+                getForecastInformation()
+            }
+
+        } else {
+            getCurrentLocation()
+            getForecastInformation()
+        }
+
+
+
 
 
     }
 
     private fun getForecastInformation() {
-        var forecastCall : Call<Basic> = Forecast.getForecast().getForecastApi(10.0687544,-84.3265938, "en", "si")
+        var forecastCall : Call<Basic> = Forecast.getForecast().getForecastApi(myLocation?.location?.latitude!!,myLocation?.location?.longitude!!, "en", "si")
 
         forecastCall.enqueue(object : Callback<Basic>{
             override fun onResponse(call: Call<Basic>?, response: Response<Basic>?) {
-                if (response != null && response.isSuccessful()){
+                if (response != null && response.isSuccessful){
 
                     forecastData = response.body()
 
@@ -101,7 +131,18 @@ class MainActivity : AppCompatActivity(){
 
     fun onRefreshData(view : View) {
 
+        getCurrentLocation()
         getForecastInformation()
+
+    }
+
+    fun getCurrentLocation(){
+
+        var locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        myLocation.location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0f, myLocation)
+
+
 
     }
 

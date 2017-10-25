@@ -1,4 +1,4 @@
-package com.santamaria.mycurrentweather.API
+package com.santamaria.mycurrentweather.Retrofit
 
 import com.santamaria.mycurrentweather.Models.Basic
 import retrofit2.Call
