@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,7 +12,8 @@
         style="@style/myTextFont"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
         android:text="Daily Forescast"
         android:textSize="25sp" />
 
@@ -22,5 +22,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="60dp"
+        android:layout_below="@+id/textView"
         android:layout_marginTop="8dp" />
-</LinearLayout>
+
+    <TextView
+        android:id="@+id/idNoData"
+        style="@style/myTextFont"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="No Data to display"
+        android:textSize="25sp"
+        android:visibility="gone" />
+</RelativeLayout>
