@@ -17,10 +17,10 @@
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
         app:layout_constraintRight_toRightOf="@+id/idLocation"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="@+id/idLocation"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.457"
         app:layout_constraintTop_toBottomOf="@+id/idLocation"
         android:layout_marginRight="8dp"
         android:layout_marginLeft="0dp" />
@@ -75,7 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="58dp"
         android:layout_marginStart="61dp"
-        android:text="H: "
+        android:text="H:   "
         android:textSize="30sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/idTempH"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -94,45 +94,27 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/idTempL"
         tools:layout_constraintBaseline_creator="1" />
 
-    <android.support.constraint.Guideline
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/guideline"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.33"
-        tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="127dp" />
-
-    <android.support.constraint.Guideline
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/guideline2"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.66"
-        tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="254dp" />
-
     <TextView
         android:id="@+id/idDaily"
         android:padding="8dp"
         style="@style/myTextFont"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="54dp"
+        android:layout_marginBottom="51dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginStart="38dp"
         android:onClick="onDailyClick"
         android:text="DAILY"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/guideline"
         tools:layout_constraintBottom_creator="1"
         tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1" />
+        tools:layout_constraintTop_creator="1"
+        app:layout_constraintRight_toLeftOf="@+id/guideline"
+        android:layout_marginRight="8dp"
+        app:layout_constraintHorizontal_bias="0.245" />
 
     <TextView
         android:id="@+id/idHourly"
@@ -140,7 +122,7 @@
         android:padding="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="46dp"
+        android:layout_marginBottom="50dp"
         android:onClick="onHourlyClick"
         android:text="HOURLY"
         android:textSize="18sp"
@@ -149,10 +131,11 @@
         tools:layout_constraintBottom_creator="1"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="@+id/guideline2"
         android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline"
+        app:layout_constraintHorizontal_bias="0.522" />
 
     <TextView
         android:id="@+id/idTempH"
@@ -224,5 +207,12 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 
 </android.support.constraint.ConstraintLayout>

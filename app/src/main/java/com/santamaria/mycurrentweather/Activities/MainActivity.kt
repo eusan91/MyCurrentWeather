@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     var forecastData : Basic? = null
 
+    var location : TextView? = null
     var icon : ImageView? = null
     var summary : TextView? = null
     var temperature : TextView? = null
@@ -62,6 +63,7 @@ class MainActivity : AppCompatActivity() {
         temperature = findViewById(R.id.idCurrentNumber) as TextView
         high = findViewById(R.id.idTempH) as TextView
         low = findViewById(R.id.idTempL) as TextView
+        location = findViewById(R.id.idLocation) as TextView
     }
 
     private fun loadMainActivity() {
@@ -73,6 +75,7 @@ class MainActivity : AppCompatActivity() {
             high?.text = Math.round(forecastData?.daily?.data?.get(0)!!.temperatureHigh).toString()
             low?.text = Math.round(forecastData?.daily?.data?.get(0)!!.temperatureLow).toString()
         }
+        location?.text = forecastData?.timezone
 
     }
 
