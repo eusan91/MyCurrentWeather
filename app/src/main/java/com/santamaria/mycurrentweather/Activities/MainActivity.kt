@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getForecastInformation() {
-        var forecastCall : Call<Basic> = Forecast.getForecast().getForecastApi(37.8267,-122.4233, "en", "si")
+        var forecastCall : Call<Basic> = Forecast.getForecast().getForecastApi(10.0687544,-84.3265938, "en", "si")
 
         forecastCall.enqueue(object : Callback<Basic>{
             override fun onResponse(call: Call<Basic>?, response: Response<Basic>?) {

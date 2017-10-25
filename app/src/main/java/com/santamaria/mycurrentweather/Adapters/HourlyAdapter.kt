@@ -2,6 +2,7 @@ package com.santamaria.mycurrentweather.Adapters
 
 import android.content.Context
 import android.opengl.Visibility
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,8 +23,26 @@ class HourlyAdapter(var context : Context?, var data: ArrayList<HourlyData>, var
 
     var dfOnlyDate = SimpleDateFormat("dd/MM")
     var df = SimpleDateFormat("HH:mm")
-    var day : Int = -1
 
+    var firstIdxDays : LinkedList<Int>? = null
+
+    init {
+
+        firstIdxDays = LinkedList()
+
+        firstIdxDays!!.add(0)
+        var day = dfOnlyDate.format(data[0].time*1000)
+
+        for ((idx, value) in data.withIndex()){
+
+            if (dfOnlyDate.format(value.time*1000) != day){
+                firstIdxDays!!.add(idx)
+                day = dfOnlyDate.format(value.time*1000)
+            }
+        }
+
+
+    }
     override fun getItem(p0: Int): Any {
         return data[p0]
     }
@@ -68,10 +87,12 @@ class HourlyAdapter(var context : Context?, var data: ArrayList<HourlyData>, var
 
         df.timeZone = TimeZone.getDefault();
 
-        if (day != Calendar.DAY_OF_WEEK){
+        if (firstIdxDays!!.contains(position)) {
             viewHolder.tvGroupDay.text = UtilityClass.getStrDayFromNumber(cal.get(Calendar.DAY_OF_WEEK)) + " " + dfOnlyDate.format(dayDate)
-            viewHolder.tvGroupDay.visibility =  View.VISIBLE
-            day = Calendar.DAY_OF_WEEK
+            viewHolder.tvGroupDay.visibility = View.VISIBLE
+
+        } else {
+            viewHolder.tvGroupDay.visibility = View.GONE
         }
 
         viewHolder.tvDay!!.text = df.format(dayDate)
