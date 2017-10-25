@@ -215,4 +215,18 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5" />
 
+    <ImageView
+        android:id="@+id/idRefresh"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="97dp"
+        android:onClick="onRefreshData"
+        android:padding="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/textView2"
+        app:layout_constraintRight_toLeftOf="@+id/idLowL"
+        app:layout_constraintTop_toBottomOf="@+id/idCurrentNumber"
+        app:srcCompat="@drawable/ic_refresh" />
+
 </android.support.constraint.ConstraintLayout>

@@ -99,5 +99,11 @@ class MainActivity : AppCompatActivity(){
 
     }
 
+    fun onRefreshData(view : View) {
+
+        getForecastInformation()
+
+    }
+
 }
 
