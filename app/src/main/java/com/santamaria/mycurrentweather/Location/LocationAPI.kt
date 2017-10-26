@@ -17,8 +17,6 @@ class LocationAPI (var mainActivity: MainActivity) : LocationListener{
         if (loc != null)
             mainActivity.getForecastInformation(loc.latitude, loc.longitude)
 
-      /*  Log.d("ema", location?.longitude.toString())
-        Log.d("ema", location?.latitude.toString())*/
     }
 
     override fun onStatusChanged(p0: String?, p1: Int, p2: Bundle?) {

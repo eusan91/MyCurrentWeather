@@ -193,12 +193,13 @@ class MainActivity : AppCompatActivity(){
         if (gpsEnabled!!) {
             myLocation = LocationAPI(this)
 
-            location?.text = "Waiting for GPS signal"
-
-
             locationManager?.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0f, myLocation)
             locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0f, myLocation)
         }
+    }
+
+    override fun onBackPressed() {
+        moveTaskToBack(true)
     }
 }
 
