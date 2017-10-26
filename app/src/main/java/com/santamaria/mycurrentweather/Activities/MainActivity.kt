@@ -2,8 +2,10 @@ package com.santamaria.mycurrentweather.Activities
 
 import android.Manifest
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Geocoder
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
@@ -11,6 +13,7 @@ import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
+import android.support.v7.app.AlertDialog
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -23,8 +26,7 @@ import com.santamaria.mycurrentweather.UtilityClass
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
-
+import java.util.*
 
 
 class MainActivity : AppCompatActivity(){
@@ -54,12 +56,12 @@ class MainActivity : AppCompatActivity(){
             if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
 
                 requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), GPS_PERMISSION)
-
+                return
             }
 
-        } else {
-            getCurrentLocation()
         }
+
+        getCurrentLocation()
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -82,7 +84,7 @@ class MainActivity : AppCompatActivity(){
 
                     forecastData = response.body()
 
-                    loadMainActivity()
+                    loadMainActivity(latitude, longitude)
                 }
             }
 
@@ -102,7 +104,7 @@ class MainActivity : AppCompatActivity(){
         location = findViewById(R.id.idLocation) as TextView
     }
 
-    private fun loadMainActivity() {
+    private fun loadMainActivity(latitude : Double, longitude : Double) {
 
         summary?.text = forecastData?.currently?.summary
         temperature?.text = Math.round(forecastData?.currently?.temperature!!).toString()
@@ -111,8 +113,17 @@ class MainActivity : AppCompatActivity(){
             high?.text = Math.round(forecastData?.daily?.data?.get(0)!!.temperatureHigh).toString()
             low?.text = Math.round(forecastData?.daily?.data?.get(0)!!.temperatureLow).toString()
         }
-        location?.text = forecastData?.timezone
 
+        val geocoder = Geocoder(this, Locale.getDefault())
+        val list = geocoder.getFromLocation(
+                latitude, longitude, 1)
+
+        if (!list.isEmpty()) {
+            val DirCalle = list[0]
+            location?.text = DirCalle.subAdminArea
+        } else {
+            location?.text = forecastData?.timezone
+        }
     }
 
     fun onDailyClick(view : View) {
@@ -143,18 +154,51 @@ class MainActivity : AppCompatActivity(){
     private fun getCurrentLocation(){
 
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        myLocation = LocationAPI(this)
 
-        val gpsEnabled = locationManager?.isProviderEnabled(LocationManager.GPS_PROVIDER)
+        var gpsEnabled = locationManager?.isProviderEnabled(LocationManager.GPS_PROVIDER)
+
         if (!gpsEnabled!!) {
-            val settingsIntent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-            startActivity(settingsIntent)
-        }
+            ActivateGPSDialog()
+        } else {
+            myLocation = LocationAPI(this)
 
-        locationManager?.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0f, myLocation)
-        locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0f, myLocation)
+            locationManager?.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0f, myLocation)
+            locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0f, myLocation)
+        }
 
     }
 
+    private fun ActivateGPSDialog(){
+
+        var alert = AlertDialog.Builder(this).create()
+        alert.setTitle("Turn on GPS?")
+        alert.setMessage("In order to get the forecast, GPS needs to be turned on")
+        alert.setButton(AlertDialog.BUTTON_POSITIVE, "OK", DialogInterface.OnClickListener { dialogInterface, i ->
+
+            val settingsIntent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+            startActivity(settingsIntent)
+
+        })
+
+        alert.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel", DialogInterface.OnClickListener { dialogInterface, i ->  })
+
+        alert.show()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        var gpsEnabled = locationManager?.isProviderEnabled(LocationManager.GPS_PROVIDER)
+
+        if (gpsEnabled!!) {
+            myLocation = LocationAPI(this)
+
+            location?.text = "Waiting for GPS signal"
+
+
+            locationManager?.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0f, myLocation)
+            locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0f, myLocation)
+        }
+    }
 }
 
