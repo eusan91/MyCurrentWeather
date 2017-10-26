@@ -6,8 +6,6 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Geocoder
-import android.location.Location
-import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
@@ -89,7 +87,7 @@ class MainActivity : AppCompatActivity(){
             }
 
             override fun onFailure(call: Call<Basic>?, t: Throwable?) {
-                Toast.makeText(applicationContext, "Communication Error", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, getString(R.string.communication_error), Toast.LENGTH_SHORT).show()
             }
 
         })
@@ -171,8 +169,8 @@ class MainActivity : AppCompatActivity(){
     private fun ActivateGPSDialog(){
 
         var alert = AlertDialog.Builder(this).create()
-        alert.setTitle("Turn on GPS?")
-        alert.setMessage("In order to get the forecast, GPS needs to be turned on")
+        alert.setTitle(getString(R.string.alert_title))
+        alert.setMessage(getString(R.string.alert_message))
         alert.setButton(AlertDialog.BUTTON_POSITIVE, "OK", DialogInterface.OnClickListener { dialogInterface, i ->
 
             val settingsIntent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
@@ -180,7 +178,7 @@ class MainActivity : AppCompatActivity(){
 
         })
 
-        alert.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel", DialogInterface.OnClickListener { dialogInterface, i ->  })
+        alert.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.button_negative), DialogInterface.OnClickListener { dialogInterface, i ->  })
 
         alert.show()
     }
