@@ -59,7 +59,7 @@ class DailyAdapter(var context : Context, var dailyList : ArrayList<DailyData>, 
         if (position == 0) {
             viewHolder.tvDay!!.text = "Today"
         } else {
-            viewHolder.tvDay!!.text = UtilityClass.getStrDayFromNumber(cal.get(Calendar.DAY_OF_WEEK))
+            viewHolder.tvDay!!.text = UtilityClass.getStrDayFromNumber(context!!, cal.get(Calendar.DAY_OF_WEEK))
         }
 
         viewHolder.ivIcon!!.setImageResource(UtilityClass.getImage(daily.icon))

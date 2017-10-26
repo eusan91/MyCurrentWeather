@@ -74,7 +74,14 @@ class MainActivity : AppCompatActivity(){
     }
 
     fun getForecastInformation(latitude : Double, longitude : Double) {
-        var forecastCall : Call<Basic> = Forecast.getForecast().getForecastApi(latitude,longitude, "en", "si")
+
+        var lang = Locale.getDefault().language
+
+        if (lang.compareTo("es", true) != 0 ){
+            lang = "en"
+        }
+
+        var forecastCall : Call<Basic> = Forecast.getForecast().getForecastApi(latitude,longitude, lang, "auto")
 
         forecastCall.enqueue(object : Callback<Basic>{
             override fun onResponse(call: Call<Basic>?, response: Response<Basic>?) {

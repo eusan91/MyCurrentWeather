@@ -3,12 +3,21 @@
     <string name="waiting_for_gps_signal">Esperando señal GPS</string>
     <string name="daily">CADA DIA</string>
     <string name="hourly">CADA HORA</string>
-    <string name="h">A:</string>
-    <string name="l">B:</string>
+    <string name="h">↑:</string>
+    <string name="l">↓:</string>
     <string name="daily_forecast">Pronóstico diario</string>
     <string name="hourly_forecast">Pronóstico por hora</string>
     <string name="communication_error">Error de comunicación</string>
     <string name="alert_title">Encender el GPS?</string>
     <string name="alert_message">Para obtener el pronóstico, el GPS debe estar encendido</string>
     <string name="button_negative">Cancelar</string>
+    <string name="sunday">Domingo</string>
+    <string name="monday">Lunes</string>
+    <string name="tuesday">Martes</string>
+    <string name="wednesday">Miércoles</string>
+    <string name="thursday">Jueves</string>
+    <string name="friday">Viernes</string>
+    <string name="saturday">Sábado</string>
+    <string name="rain_probability">Probabilidad de lluvias:</string>
+
 </resources>

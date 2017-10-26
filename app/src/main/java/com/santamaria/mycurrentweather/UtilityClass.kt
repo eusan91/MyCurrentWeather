@@ -1,5 +1,6 @@
 package com.santamaria.mycurrentweather
 
+import android.content.Context
 import java.util.*
 
 /**
@@ -21,7 +22,8 @@ class UtilityClass {
                 "cloudy-night" -> drawableToUse = R.drawable.cloudy_night
                 "fog" -> drawableToUse = R.drawable.fog
                 "na" -> drawableToUse = R.drawable.na
-                "partly_cloudy", "partly-cloudy-night", "partly-cloudy-day" -> drawableToUse = R.drawable.partly_cloudy
+                "partly-cloudy-day" -> drawableToUse = R.drawable.partly_cloudy_day
+                "partly_cloudy", "partly-cloudy-night" -> drawableToUse = R.drawable.partly_cloudy
                 "rain" -> drawableToUse = R.drawable.rain
                 "sleet" -> drawableToUse = R.drawable.sleet
                 "snow" -> drawableToUse = R.drawable.snow
@@ -34,18 +36,18 @@ class UtilityClass {
 
         }
 
-        fun getStrDayFromNumber( dayInt : Int ) : String {
+        fun getStrDayFromNumber(context : Context, dayInt : Int ) : String {
 
             var day = ""
             when (dayInt) {
 
-                Calendar.SUNDAY -> day = "Sunday"
-                Calendar.MONDAY -> day = "Monday"
-                Calendar.TUESDAY -> day = "Tuesday"
-                Calendar.WEDNESDAY -> day = "Wednesday"
-                Calendar.THURSDAY -> day = "Thursday"
-                Calendar.FRIDAY -> day = "Friday"
-                Calendar.SATURDAY -> day = "Saturday"
+                Calendar.SUNDAY -> day = context.getString(R.string.sunday)
+                Calendar.MONDAY -> day = context.getString(R.string.monday)
+                Calendar.TUESDAY -> day = context.getString(R.string.tuesday)
+                Calendar.WEDNESDAY -> day = context.getString(R.string.wednesday)
+                Calendar.THURSDAY -> day = context.getString(R.string.thursday)
+                Calendar.FRIDAY -> day = context.getString(R.string.friday)
+                Calendar.SATURDAY -> day = context.getString(R.string.saturday)
 
             }
 

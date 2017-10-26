@@ -23,7 +23,7 @@
         app:layout_constraintHorizontal_bias="0.457"
         app:layout_constraintTop_toBottomOf="@+id/idLocation"
         android:layout_marginRight="8dp"
-        android:layout_marginLeft="0dp" />
+        android:layout_marginEnd="8dp" />
 
     <TextView
         android:id="@+id/idCurrentWeather"
@@ -65,7 +65,7 @@
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintTop_toTopOf="@+id/idCurrentNumber"
         app:layout_constraintLeft_toRightOf="@+id/idCurrentNumber"
-        android:layout_marginLeft="3dp"
+        android:layout_marginLeft="2dp"
         android:layout_marginTop="16dp" />
 
     <TextView
@@ -73,7 +73,7 @@
         style="@style/myTextFont"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="58dp"
+        android:layout_marginLeft="61dp"
         android:layout_marginStart="61dp"
         android:text="@string/h"
         android:textSize="30sp"
@@ -100,8 +100,8 @@
         style="@style/myTextFont"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="51dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="52dp"
+        android:layout_marginLeft="38dp"
         android:layout_marginStart="38dp"
         android:onClick="onDailyClick"
         android:text="@string/daily"
@@ -111,10 +111,10 @@
         app:layout_constraintLeft_toLeftOf="parent"
         tools:layout_constraintBottom_creator="1"
         tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1"
         app:layout_constraintRight_toLeftOf="@+id/guideline"
         android:layout_marginRight="8dp"
-        app:layout_constraintHorizontal_bias="0.245" />
+        app:layout_constraintHorizontal_bias="0.245"
+        android:layout_marginEnd="8dp" />
 
     <TextView
         android:id="@+id/idHourly"
@@ -122,20 +122,20 @@
         android:padding="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="53dp"
         android:onClick="onHourlyClick"
         android:text="@string/hourly"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_constraintBottom_creator="1"
-        tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginEnd="59dp"
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="@+id/guideline"
-        app:layout_constraintHorizontal_bias="0.522" />
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="1.0" />
 
     <TextView
         android:id="@+id/idTempH"
@@ -150,7 +150,7 @@
         android:layout_marginStart="28dp"
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="@+id/idHighL"
-        android:layout_marginLeft="0dp" />
+        android:layout_marginLeft="28dp" />
 
     <TextView
         android:id="@+id/textView2"
@@ -206,22 +206,23 @@
         android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintLeft_creator="1" />
 
     <android.support.constraint.Guideline
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/guideline"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
+        app:layout_constraintGuide_percent="0.5"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="206dp" />
 
     <ImageView
         android:id="@+id/idRefresh"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="97dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:onClick="onRefreshData"
         android:padding="8dp"
         android:visibility="gone"

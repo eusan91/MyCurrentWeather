@@ -88,7 +88,7 @@ class HourlyAdapter(var context : Context?, var data: ArrayList<HourlyData>, var
         df.timeZone = TimeZone.getDefault();
 
         if (firstIdxDays!!.contains(position)) {
-            viewHolder.tvGroupDay.text = UtilityClass.getStrDayFromNumber(cal.get(Calendar.DAY_OF_WEEK)) + " " + dfOnlyDate.format(dayDate)
+            viewHolder.tvGroupDay.text = UtilityClass.getStrDayFromNumber(context!!, cal.get(Calendar.DAY_OF_WEEK)) + " " + dfOnlyDate.format(dayDate)
             viewHolder.tvGroupDay.visibility = View.VISIBLE
 
         } else {
