@@ -224,6 +224,7 @@
         android:layout_marginTop="97dp"
         android:onClick="onRefreshData"
         android:padding="8dp"
+        android:visibility="gone"
         app:layout_constraintLeft_toRightOf="@+id/textView2"
         app:layout_constraintRight_toLeftOf="@+id/idLowL"
         app:layout_constraintTop_toBottomOf="@+id/idCurrentNumber"
