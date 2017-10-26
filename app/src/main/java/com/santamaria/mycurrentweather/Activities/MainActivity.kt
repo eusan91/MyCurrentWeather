@@ -59,6 +59,7 @@ class MainActivity : AppCompatActivity(){
 
         }
 
+        myLocation = LocationAPI(this)
         getCurrentLocation()
     }
 
@@ -167,8 +168,8 @@ class MainActivity : AppCompatActivity(){
         } else {
             myLocation = LocationAPI(this)
 
-            locationManager?.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0f, myLocation)
-            locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0f, myLocation)
+            locationManager?.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1800000, 0f, myLocation)
+            locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1800000, 0f, myLocation)
         }
 
     }
@@ -196,11 +197,16 @@ class MainActivity : AppCompatActivity(){
         var gpsEnabled = locationManager?.isProviderEnabled(LocationManager.GPS_PROVIDER)
 
         if (gpsEnabled!!) {
-            myLocation = LocationAPI(this)
 
-            locationManager?.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0f, myLocation)
-            locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0f, myLocation)
+
+            locationManager?.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1800000, 0f, myLocation)
+            locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1800000, 0f, myLocation)
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        locationManager?.removeUpdates(myLocation)
     }
 
     override fun onBackPressed() {
