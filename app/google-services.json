@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "478927631150",
+    "firebase_url": "https://mycurrentweather.firebaseio.com",
+    "project_id": "mycurrentweather",
+    "storage_bucket": "mycurrentweather.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:478927631150:android:44a899efa5fa15de",
+        "android_client_info": {
+          "package_name": "com.santamaria.mycurrentweather"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "478927631150-pag6ilo3d60p8ggvv7v24p37i0o7bvh2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.santamaria.mycurrentweather",
+            "certificate_hash": "18a3aa01099fa7ca4a7fb354219889df08fcd76b"
+          }
+        },
+        {
+          "client_id": "478927631150-ai827jhm1l8bh61soa9ib6fno0e5j9el.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxQ06AgkVWe9qFjKau-1MNDAW8X1EzMr0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "478927631150-ai827jhm1l8bh61soa9ib6fno0e5j9el.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

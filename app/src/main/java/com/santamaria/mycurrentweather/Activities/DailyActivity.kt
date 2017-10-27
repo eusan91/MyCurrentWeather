@@ -11,6 +11,7 @@ import com.santamaria.mycurrentweather.Adapters.DailyAdapter
 import com.santamaria.mycurrentweather.Models.Daily
 
 import com.santamaria.mycurrentweather.R
+import com.santamaria.mycurrentweather.UtilityClass
 
 class DailyActivity : AppCompatActivity() {
 
@@ -26,6 +27,8 @@ class DailyActivity : AppCompatActivity() {
 
         listViewDaily = findViewById(R.id.idListViewDaily) as ListView?
         tvNoData = findViewById(R.id.idNoData) as TextView?
+
+        UtilityClass.loadAdds(this)
 
         var bundle = intent.extras
 

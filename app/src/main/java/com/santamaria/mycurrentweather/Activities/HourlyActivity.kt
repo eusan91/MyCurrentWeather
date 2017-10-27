@@ -10,6 +10,7 @@ import com.santamaria.mycurrentweather.Adapters.HourlyAdapter
 import com.santamaria.mycurrentweather.Models.Hourly
 
 import com.santamaria.mycurrentweather.R
+import com.santamaria.mycurrentweather.UtilityClass
 
 class HourlyActivity : AppCompatActivity() {
 
@@ -25,6 +26,8 @@ class HourlyActivity : AppCompatActivity() {
 
         listViewHourly = findViewById(R.id.idListviewHourly) as ListView
         tvNoData = findViewById(R.id.idNoData) as TextView?
+
+        UtilityClass.loadAdds(this)
 
         var extras = intent.extras
 

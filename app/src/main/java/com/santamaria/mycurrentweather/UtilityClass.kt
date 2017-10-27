@@ -1,6 +1,10 @@
 package com.santamaria.mycurrentweather
 
+import android.app.Activity
 import android.content.Context
+import android.view.View
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
 import java.util.*
 
 /**
@@ -9,6 +13,8 @@ import java.util.*
 class UtilityClass {
 
     companion object {
+
+        private var mAdView: AdView? = null
 
         fun getImage(iconName : String) : Int {
 
@@ -52,6 +58,12 @@ class UtilityClass {
             }
 
             return day
+        }
+
+        fun loadAdds(activity: Activity) {
+            mAdView = activity.findViewById(R.id.adView) as AdView
+            val adRequest = AdRequest.Builder().build()
+            mAdView?.loadAd(adRequest)
         }
 
     }

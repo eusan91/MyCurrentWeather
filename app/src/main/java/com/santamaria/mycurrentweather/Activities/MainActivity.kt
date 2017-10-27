@@ -23,6 +23,8 @@ import android.widget.ImageView
 import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
 import com.santamaria.mycurrentweather.App.MyApplication
 import com.santamaria.mycurrentweather.Location.LocationAPI
 import com.santamaria.mycurrentweather.Retrofit.Forecast
@@ -64,6 +66,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         getViews()
 
+        UtilityClass.loadAdds(this)
+
         if (MyApplication.firstRun){
             MyApplication.saveSetting(MyApplication.keyNameFirstRun)
 
@@ -84,6 +88,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         myLocation = LocationAPI(this)
         getCurrentLocation()
     }
+
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
 
