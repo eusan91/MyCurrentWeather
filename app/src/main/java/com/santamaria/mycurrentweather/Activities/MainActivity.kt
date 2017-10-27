@@ -25,6 +25,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
+import com.kobakei.ratethisapp.RateThisApp
 import com.santamaria.mycurrentweather.App.MyApplication
 import com.santamaria.mycurrentweather.Location.LocationAPI
 import com.santamaria.mycurrentweather.Retrofit.Forecast
@@ -65,6 +66,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(R.layout.main_drawer)
 
         getViews()
+
+        rateThisApp()
 
         UtilityClass.loadAdds(this)
 
@@ -377,6 +380,24 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         intent1.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
         finish()
         startActivity(intent1)
+    }
+
+    private fun rateThisApp() {
+
+        val config = RateThisApp.Config(3, 5)
+        config.setTitle(R.string.rate_title)
+        config.setMessage(R.string.rate_msg)
+        config.setYesButtonText(R.string.rate_now)
+        config.setNoButtonText(R.string.rate_no)
+        config.setCancelButtonText(R.string.rate_later)
+        RateThisApp.init(config)
+
+        //Monitor launch times and interval from installation
+        RateThisApp.onCreate(this)
+
+        //If the condition is satisfied "Rate this app" dialog will be shown
+        RateThisApp.showRateDialogIfNeeded(this)
+
     }
 
 

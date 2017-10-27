@@ -30,4 +30,9 @@
     <string name="measurement">Set Thermometer Unit</string>
     <string name="select_measurement">Select Thermometric Unit</string>
     <string name="title_measurement">Thermometric Unit</string>
+    <string name="rate_title">Rate this app</string>
+    <string name="rate_msg">It won\'t take more than a minute. Thank you for your support!</string>
+    <string name="rate_later">Later</string>
+    <string name="rate_no">No</string>
+    <string name="rate_now">Rate Now</string>
 </resources>

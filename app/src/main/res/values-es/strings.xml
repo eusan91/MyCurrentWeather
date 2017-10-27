@@ -28,5 +28,9 @@
     <string name="cancel">Cancelar</string>
     <string name="measurement">Unidad termométrica</string>
     <string name="no_data_to_display">No hay datos a mostrar</string>
-
+    <string name="rate_title">Calificá esta aplicación</string>
+    <string name="rate_msg">No te tomará más de una minuto. ¡Gracias por tu ayuda!</string>
+    <string name="rate_later">Después</string>
+    <string name="rate_no">No</string>
+    <string name="rate_now">Calificar</string>
 </resources>
