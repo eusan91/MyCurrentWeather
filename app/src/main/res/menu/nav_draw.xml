@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+
+    <item
+        android:id="@+id/idMeasurement"
+        android:icon="@drawable/ic_measurement"
+        android:title="Measurement º"/>
+
+    <item
+        android:id="@+id/idlanguage"
+        android:icon="@drawable/ic_language"
+        android:title="Measurement º"/>
+    </group>
+
+        <item
+            android:id="@+id/idExit"
+            android:icon="@drawable/ic_exit"
+            android:title="Measurement º"/>
+</menu>
