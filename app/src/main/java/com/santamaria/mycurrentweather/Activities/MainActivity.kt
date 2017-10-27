@@ -174,14 +174,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun getCurrentLocation(){
 
-        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        if (locationManager == null) {
+            locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        }
 
         var gpsEnabled = locationManager?.isProviderEnabled(LocationManager.GPS_PROVIDER)
 
         if (!gpsEnabled!!) {
             ActivateGPSDialog()
         } else {
-            myLocation = LocationAPI(this)
+
+            if (myLocation == null){
+                LocationAPI(this)
+            }
 
             locationManager?.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1800000, 1000f, myLocation)
             locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1800000, 1000f, myLocation)
@@ -206,7 +211,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onResume() {
         super.onResume()
 
-        if (locationManager != null) {
+        if (locationManager != null && myLocation != null) {
             var gpsEnabled = locationManager?.isProviderEnabled(LocationManager.GPS_PROVIDER)
 
             if (gpsEnabled!!) {
@@ -218,7 +223,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onStop() {
         super.onStop()
-        if (locationManager != null) {
+        if (locationManager != null && myLocation != null) {
             locationManager?.removeUpdates(myLocation)
         }
     }

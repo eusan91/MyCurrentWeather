@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MiClimaActual</string>
+    <string name="app_name">Mi Clima Actual</string>
     <string name="waiting_for_gps_signal">Esperando señal GPS</string>
     <string name="daily">CADA DIA</string>
     <string name="hourly">CADA HORA</string>
@@ -8,7 +8,7 @@
     <string name="daily_forecast">Pronóstico diario</string>
     <string name="hourly_forecast">Pronóstico por hora</string>
     <string name="communication_error">Error de comunicación</string>
-    <string name="alert_title">Encender el GPS?</string>
+    <string name="alert_title">¿Encender el GPS?</string>
     <string name="alert_message">Para obtener el pronóstico, el GPS debe estar encendido</string>
     <string name="button_negative">Cancelar</string>
     <string name="sunday">Domingo</string>
