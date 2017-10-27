@@ -27,5 +27,7 @@
     <string name="select_language">Select your Language</string>
     <string name="cancel">Cancel</string>
     <string name="no_data_to_display">No Data to display</string>
-    <string name="measurement">Select C - F</string>
+    <string name="measurement">Set Thermometer</string>
+    <string name="select_measurement">Select Thermometric Unit</string>
+    <string name="title_measurement">Thermometric Unit</string>
 </resources>

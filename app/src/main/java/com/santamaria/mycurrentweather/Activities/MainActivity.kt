@@ -54,6 +54,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     val SPANISH_LANG = "es"
     val ENGLISH_LANG = "en"
 
+    val CELSIUS_MEASUREMENT = "si"
+    val FARH_MEASUREMENT = "us"
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -241,7 +245,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when(item.itemId){
 
             R.id.idExit -> { alertExitMessage()}
-            R.id.idMeasurement -> {}
+            R.id.idMeasurement -> { createAlertDialogThermometric() }
             R.id.idlanguage -> { createAlertDialogLanguage() }
         }
 
@@ -276,7 +280,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         var radioEnglish = viewInflated.findViewById(R.id.english) as RadioButton
         var radioSpanish = viewInflated.findViewById(R.id.spanish) as RadioButton
 
-        if (MyApplication.language.compareTo("en") == 0) {
+        if (MyApplication.language.compareTo(ENGLISH_LANG) == 0) {
             radioEnglish.isChecked = true
         } else {
             radioSpanish.isChecked = true
@@ -290,18 +294,62 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             if (englishState && MyApplication.language.compareTo(ENGLISH_LANG) != 0) {
 
                 MyApplication.language = ENGLISH_LANG
-                MyApplication.saveSetting(MyApplication.keyNameLanguage)
-                MyApplication.updateLanguage(resources)
-                restartApp()
 
             } else if (spanishState && MyApplication.language.compareTo(SPANISH_LANG) != 0) {
 
                 MyApplication.language = SPANISH_LANG
-                MyApplication.saveSetting(MyApplication.keyNameLanguage)
-                MyApplication.updateLanguage(resources)
-                restartApp()
 
             }
+
+            MyApplication.saveSetting(MyApplication.keyNameLanguage)
+            MyApplication.updateLanguage(resources)
+            restartApp()
+
+        }.setNegativeButton(getString(R.string.cancel), { dialogInterface, i ->
+            //no action required
+        })
+
+        builder.create().show()
+    }
+
+    private fun createAlertDialogThermometric() {
+
+        val builder = AlertDialog.Builder(this)
+
+        builder.setTitle(getString(R.string.title_measurement))
+        builder.setIcon(R.drawable.ic_language)
+        builder.setMessage(getString(R.string.select_measurement))
+
+        val viewInflated = LayoutInflater.from(this).inflate(R.layout.dialog_define_measurement_unit_item, null)
+        builder.setView(viewInflated)
+
+        var radioCelsius = viewInflated.findViewById(R.id.celsius) as RadioButton
+        var radioFahrenheit = viewInflated.findViewById(R.id.fahrenheit) as RadioButton
+
+        if (MyApplication.measurement.compareTo(CELSIUS_MEASUREMENT) == 0) {
+            radioCelsius.isChecked = true
+        } else {
+            radioFahrenheit.isChecked = true
+        }
+
+        //get the one from the system and check
+        builder.setPositiveButton("OK") { dialogInterface, i ->
+            val radioCelsius = radioCelsius.isChecked
+            val radioFahrenheit = radioFahrenheit.isChecked
+
+            if (radioCelsius && MyApplication.measurement.compareTo(CELSIUS_MEASUREMENT) != 0) {
+
+                MyApplication.measurement = CELSIUS_MEASUREMENT
+
+            } else if (radioFahrenheit && MyApplication.language.compareTo(FARH_MEASUREMENT) != 0) {
+
+                MyApplication.measurement = FARH_MEASUREMENT
+
+            }
+
+            MyApplication.saveSetting(MyApplication.keyNameMeasurement)
+            getCurrentLocation()
+
         }.setNegativeButton(getString(R.string.cancel), { dialogInterface, i ->
             //no action required
         })

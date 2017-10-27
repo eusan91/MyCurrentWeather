@@ -26,7 +26,7 @@
     <string name="language">Idioma</string>
     <string name="select_language">Seleccione su idioma</string>
     <string name="cancel">Cancelar</string>
-    <string name="measurement">Seleccione C - F</string>
+    <string name="measurement">Unidad termométrica</string>
     <string name="no_data_to_display">No hay datos a mostrar</string>
 
 </resources>
