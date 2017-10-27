@@ -144,7 +144,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         if (!list.isEmpty()) {
             val DirCalle = list[0]
-            location?.text = DirCalle.subAdminArea
+            location?.text = DirCalle.featureName
         } else {
             location?.text = forecastData?.timezone
         }
