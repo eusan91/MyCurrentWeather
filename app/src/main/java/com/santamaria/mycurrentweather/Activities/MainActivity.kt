@@ -2,11 +2,8 @@ package com.santamaria.mycurrentweather.Activities
 
 import android.Manifest
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
-import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.content.res.Configuration
 import android.location.Geocoder
 import android.location.LocationManager
 import android.os.Build
@@ -213,19 +210,21 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onResume() {
         super.onResume()
 
-        var gpsEnabled = locationManager?.isProviderEnabled(LocationManager.GPS_PROVIDER)
+        if (locationManager != null) {
+            var gpsEnabled = locationManager?.isProviderEnabled(LocationManager.GPS_PROVIDER)
 
-        if (gpsEnabled!!) {
-
-
-            locationManager?.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1800000, 1000f, myLocation)
-            locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1800000, 1000f, myLocation)
+            if (gpsEnabled!!) {
+                locationManager?.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1800000, 1000f, myLocation)
+                locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1800000, 1000f, myLocation)
+            }
         }
     }
 
     override fun onStop() {
         super.onStop()
-        locationManager?.removeUpdates(myLocation)
+        if (locationManager != null) {
+            locationManager?.removeUpdates(myLocation)
+        }
     }
 
     override fun onBackPressed() {
