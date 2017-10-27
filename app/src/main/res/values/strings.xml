@@ -20,4 +20,12 @@
     <string name="saturday">Saturday</string>
     <string name="rain_probability">Rain probability:</string>
     <string name="my_current_weather">My Current Weather</string>
+    <string name="exit">Exit?</string>
+    <string name="exit_title_msg">Do you want to close the app?</string>
+    <string name="yes">Yes</string>
+    <string name="language">Language</string>
+    <string name="select_language">Select your Language</string>
+    <string name="cancel">Cancel</string>
+    <string name="no_data_to_display">No Data to display</string>
+    <string name="measurement">Select C - F</string>
 </resources>

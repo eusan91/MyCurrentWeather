@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Clima Actual</string>
+    <string name="app_name">MiClimaActual</string>
     <string name="waiting_for_gps_signal">Esperando señal GPS</string>
     <string name="daily">CADA DIA</string>
     <string name="hourly">CADA HORA</string>
@@ -19,5 +19,14 @@
     <string name="friday">Viernes</string>
     <string name="saturday">Sábado</string>
     <string name="rain_probability">Probabilidad de lluvias:</string>
+    <string name="my_current_weather">Mi Clima Actual</string>
+    <string name="exit">¿Salir?</string>
+    <string name="exit_title_msg">¿Seguro que desea cerrar la aplicación?</string>
+    <string name="yes">Si</string>
+    <string name="language">Idioma</string>
+    <string name="select_language">Seleccione su idioma</string>
+    <string name="cancel">Cancelar</string>
+    <string name="measurement">Seleccione C - F</string>
+    <string name="no_data_to_display">No hay datos a mostrar</string>
 
 </resources>
