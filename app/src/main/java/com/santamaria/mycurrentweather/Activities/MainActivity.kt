@@ -49,15 +49,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     var myLocation : LocationAPI? = null
     var locationManager : LocationManager? = null
-    val GPS_PERMISSION = 1
+    private val GPS_PERMISSION = 1
 
-    val SPANISH_LANG = "es"
-    val ENGLISH_LANG = "en"
+    private val SPANISH_LANG = "es"
+    private val ENGLISH_LANG = "en"
 
-    val CELSIUS_MEASUREMENT = "si"
-    val FARH_MEASUREMENT = "us"
-
-
+    private val CELSIUS_MEASUREMENT = "si"
+    private val FARH_MEASUREMENT = "us"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -172,9 +170,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     fun onRefreshData(view : View) {
 
-        //getCurrentLocation()
-        //getForecastInformation()
-
     }
 
     private fun getCurrentLocation(){
@@ -191,25 +186,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             locationManager?.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1800000, 1000f, myLocation)
             locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1800000, 1000f, myLocation)
         }
-
     }
 
-    private fun ActivateGPSDialog(){
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
-        var alert = AlertDialog.Builder(this).create()
-        alert.setTitle(getString(R.string.alert_title))
-        alert.setMessage(getString(R.string.alert_message))
-        alert.setButton(AlertDialog.BUTTON_POSITIVE, "OK", { dialogInterface, i ->
+        when(item.itemId){
 
-            val settingsIntent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-            startActivity(settingsIntent)
+            R.id.idExit -> { alertExitMessage()}
+            R.id.idMeasurement -> { createAlertDialogThermometric() }
+            R.id.idlanguage -> { createAlertDialogLanguage() }
+        }
 
-        })
-
-        alert.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.button_negative), { dialogInterface, i ->  })
-
-        alert.show()
+        drawerLayout?.closeDrawer(GravityCompat.START)
+        return true
     }
+
+    // --------- LIFE CYCLE overrides ------
 
     override fun onResume() {
         super.onResume()
@@ -239,18 +231,23 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+    // --------- ALERT DIALOGS ------
 
+    private fun ActivateGPSDialog(){
 
-        when(item.itemId){
+        var alert = AlertDialog.Builder(this).create()
+        alert.setTitle(getString(R.string.alert_title))
+        alert.setMessage(getString(R.string.alert_message))
+        alert.setButton(AlertDialog.BUTTON_POSITIVE, "OK", { dialogInterface, i ->
 
-            R.id.idExit -> { alertExitMessage()}
-            R.id.idMeasurement -> { createAlertDialogThermometric() }
-            R.id.idlanguage -> { createAlertDialogLanguage() }
-        }
+            val settingsIntent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+            startActivity(settingsIntent)
 
-        drawerLayout?.closeDrawer(GravityCompat.START)
-        return true
+        })
+
+        alert.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.button_negative), { dialogInterface, i ->  })
+
+        alert.show()
     }
 
     private fun alertExitMessage() : Unit {
