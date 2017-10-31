@@ -19,10 +19,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
-import android.widget.RadioButton
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.santamaria.mycurrentweather.App.MyApplication
@@ -39,19 +36,20 @@ import java.util.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    var forecastData : Basic? = null
+    private var forecastData : Basic? = null
 
-    var location : TextView? = null
-    var icon : ImageView? = null
-    var summary : TextView? = null
-    var temperature : TextView? = null
-    var high : TextView? = null
-    var low : TextView? = null
-    var navDrawer : NavigationView? = null
-    var drawerLayout : DrawerLayout? = null
+    private var location : TextView? = null
+    private var icon : ImageView? = null
+    private var summary : TextView? = null
+    private var temperature : TextView? = null
+    private var high : TextView? = null
+    private var low : TextView? = null
+    private var navDrawer : NavigationView? = null
+    private var drawerLayout : DrawerLayout? = null
+    private var progressBar : ProgressBar? = null
 
-    var myLocation : LocationAPI? = null
-    var locationManager : LocationManager? = null
+    private var myLocation : LocationAPI? = null
+    private var locationManager : LocationManager? = null
     private val GPS_PERMISSION = 1
 
     private val SPANISH_LANG = "es"
@@ -76,17 +74,27 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         navDrawer?.setNavigationItemSelectedListener ( this )
 
+        if (checkGPSPermission()){
+
+            myLocation = LocationAPI(this)
+            getCurrentLocation()
+
+        }
+
+    }
+
+    private fun checkGPSPermission() : Boolean {
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
 
             if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
 
                 requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), GPS_PERMISSION)
-                return
+                return false
             }
         }
 
-        myLocation = LocationAPI(this)
-        getCurrentLocation()
+        return true
     }
 
 
@@ -94,6 +102,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         if (requestCode == GPS_PERMISSION){
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                myLocation = LocationAPI(this)
                 getCurrentLocation()
             }
         }
@@ -118,6 +127,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             override fun onFailure(call: Call<Basic>?, t: Throwable?) {
                 Toast.makeText(applicationContext, getString(R.string.communication_error), Toast.LENGTH_SHORT).show()
+                progressBar?.visibility = View.INVISIBLE
             }
 
         })
@@ -132,10 +142,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         location = findViewById(R.id.idLocation) as TextView
         navDrawer = findViewById(R.id.idNavDrawer) as NavigationView
         drawerLayout = findViewById(R.id.idDrawerLayout) as DrawerLayout
+        progressBar = findViewById(R.id.idProgress) as ProgressBar
     }
 
     private fun loadMainActivity(latitude : Double, longitude : Double) {
 
+        progressBar?.visibility = View.INVISIBLE
         summary?.text = forecastData?.currently?.summary
         temperature?.text = Math.round(forecastData?.currently?.temperature!!).toString()
         icon?.setImageResource(UtilityClass.getImage(forecastData?.currently?.icon!!))
@@ -187,22 +199,27 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun getCurrentLocation(){
 
-        if (locationManager == null) {
-            locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        }
+        if (checkGPSPermission()) {
 
-        var gpsEnabled = locationManager?.isProviderEnabled(LocationManager.GPS_PROVIDER)
-
-        if (!gpsEnabled!!) {
-            ActivateGPSDialog()
-        } else {
-
-            if (myLocation == null){
-                LocationAPI(this)
+            if (locationManager == null) {
+                locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
             }
 
-            locationManager?.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1800000, 1000f, myLocation)
-            locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1800000, 1000f, myLocation)
+            var gpsEnabled = locationManager?.isProviderEnabled(LocationManager.GPS_PROVIDER)
+
+            if (!gpsEnabled!!) {
+                ActivateGPSDialog()
+            } else {
+
+                progressBar?.visibility = View.VISIBLE
+
+                if (myLocation == null) {
+                    LocationAPI(this)
+                }
+
+                locationManager?.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1800000, 1000f, myLocation)
+                locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1800000, 1000f, myLocation)
+            }
         }
     }
 
@@ -227,7 +244,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (locationManager != null && myLocation != null) {
             var gpsEnabled = locationManager?.isProviderEnabled(LocationManager.GPS_PROVIDER)
 
-            if (gpsEnabled!!) {
+            if (temperature?.text!!.isEmpty()){
+                progressBar?.visibility = View.VISIBLE
+            }
+            if (gpsEnabled!! && checkGPSPermission()) {
                 locationManager?.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1800000, 1000f, myLocation)
                 locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1800000, 1000f, myLocation)
             }
