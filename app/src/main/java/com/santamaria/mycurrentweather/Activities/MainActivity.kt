@@ -20,8 +20,6 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdView
 import com.kobakei.ratethisapp.RateThisApp
 import com.santamaria.mycurrentweather.App.MyApplication
 import com.santamaria.mycurrentweather.Location.LocationAPI
@@ -191,6 +189,23 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     fun onRefreshData(view : View) {
 
+        if (checkGPSPermission()) {
+            refreshUI(true)
+        }
+    }
+
+    private fun refreshUI(showProgress : Boolean) {
+        if (locationManager != null && myLocation != null) {
+            var gpsEnabled = locationManager?.isProviderEnabled(LocationManager.GPS_PROVIDER)
+
+            if (temperature?.text!!.contains("-", true) &&  showProgress){
+                progressBar?.visibility = View.VISIBLE
+            }
+            if (gpsEnabled!! && checkGPSPermission()) {
+                locationManager?.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1800000, 1000f, myLocation)
+                locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1800000, 1000f, myLocation)
+            }
+        }
     }
 
     fun openDarkSkyWeb(view : View) {
@@ -244,17 +259,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onResume() {
         super.onResume()
 
-        if (locationManager != null && myLocation != null) {
-            var gpsEnabled = locationManager?.isProviderEnabled(LocationManager.GPS_PROVIDER)
-
-            if (temperature?.text!!.isEmpty()){
-                progressBar?.visibility = View.VISIBLE
-            }
-            if (gpsEnabled!! && checkGPSPermission()) {
-                locationManager?.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1800000, 1000f, myLocation)
-                locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1800000, 1000f, myLocation)
-            }
-        }
+        refreshUI(false)
     }
 
     override fun onStop() {
